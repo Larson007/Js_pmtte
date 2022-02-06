@@ -1,0 +1,83 @@
+{
+  "name": "woodstack",
+  "version": "0.0.1",
+  "description": "It's amazing, also, I'm amazing.",
+  "private": true,
+  "watch": {
+    "build-html": {
+      "patterns": "src/html",
+      "extensions": "pug",
+      "quiet": false
+    },
+    "build-css": {
+      "patterns": "src/sass",
+      "extensions": "scss",
+      "quiet": false
+    },
+    "build-js": {
+      "patterns": [
+        "src/js/"
+      ],
+      "extensions": "js",
+      "quiet": false
+    },
+    "build-img": {
+      "patterns": "src/img",
+      "extensions": "png,jpg,jpeg,gif",
+      "quiet": false
+    },
+    "build-copy": {
+      "patterns": [
+        "src/fonts",
+        "src/favicon",
+        "src/sounds"
+      ],
+      "extensions": "*",
+      "quiet": false
+    }
+  },
+  "scripts": {
+    "build-html": "pug src/html/templates --out dist",
+    "watch-html": "npm-watch build-html",
+    "build-css": "node-sass src/sass/style.scss dist/style.css --output-style compressed",
+    "watch-css": "npm-watch build-css",
+    "js-dir": "make-dir dist/js",
+    "js-wp": "webpack",
+    "build-js": "run-s js-dir js-wp",
+    "watch-js": "npm-watch build-js",
+    "build-img": "imagemin src/img/*.{png,jpg,jpeg,gif} --out-dir=dist/img",
+    "watch-img": "npm-watch build-img",
+    "build-copy": "copyfiles -u 1 src/fonts/* src/favicon/* src/sounds/* dist",
+    "watch-copy": "npm-watch build-copy",
+    "watch": "run-p watch-*",
+    "build": "run-s clear build-*",
+    "clear": "del-cli dist -f",
+    "browser": "reload -d dist -b"
+  },
+  "author": "Matthieu Schneider",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "babel-loader": "^8.0.6",
+    "babel-minify-webpack-plugin": "^0.3.1",
+    "copyfiles": "^2.1.1",
+    "del-cli": "^3.0.0",
+    "imagemin-cli": "^5.0.0",
+    "make-dir-cli": "^1.0.0",
+    "node-sass": "^4.13.0",
+    "npm-run-all": "^4.1.5",
+    "npm-watch": "^0.6.0",
+    "pug": "^2.0.4",
+    "pug-cli": "^1.0.0-alpha6",
+    "reload": "^3.0.3",
+    "webpack": "^4.26.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.0.0",
+    "normalize.css": "^8.0.1",
+    "toastr": "^2.1.4",
+    "wowjs": "^1.1.3"
+  }
+}
